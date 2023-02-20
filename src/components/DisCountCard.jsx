@@ -1,5 +1,5 @@
 import React from 'react'
-import paperBag from '../assets/cart.svg'
+import paperBag from '.././assets/Paperbag.png'
 
 const DisCountCard = () => {
   return (

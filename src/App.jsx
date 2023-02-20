@@ -4,6 +4,7 @@ import Home from "./components/Home";
 import Cart from "./components/pages/Cart";
 import ProductDetails from './components/pages/ProductDetails'
 
+
 // import { ToastContainer, toast } from 'react-toastify'
 // import 'react-toastify/dist/ReactToastify.css'
 
@@ -17,7 +18,7 @@ function App() {
     <Routes>
           <Route index element={<Home />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/prod" element={<ProductDetails />} />
+          <Route path="/product/:info" element={<ProductDetails />} />
     </Routes>
   );
 }
