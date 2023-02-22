@@ -1,25 +1,25 @@
-import React from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Cart from "./components/pages/Cart";
-import ProductDetails from './components/pages/ProductDetails'
+import ProductDetails from "./components/pages/ProductDetails";
+import productsData from "./productsData";
 
-
-// import { ToastContainer, toast } from 'react-toastify'
-// import 'react-toastify/dist/ReactToastify.css'
+export const ProductDataContext = createContext();
 
 function App() {
-  //  const notify = () =>
-  //    toast.success("Added to Cart!", {
-  //      pauseOnHover: false,
-  //    });
+  const [productData, setProductData] = useState(productsData);
+
+
 
   return (
-    <Routes>
-          <Route index element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/product/:info" element={<ProductDetails />} />
-    </Routes>
+    <ProductDataContext.Provider value={productData}>
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/product/:info" element={<ProductDetails />} />
+      </Routes>
+    </ProductDataContext.Provider>
   );
 }
 
