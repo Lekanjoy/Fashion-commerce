@@ -1,15 +1,18 @@
-import React, { useContext } from "react";
+import React, {useState, useContext } from "react";
+import "react-toastify/dist/ReactToastify.css";
 import ProductCard from "./ProductCard";
 import { ProductDataContext } from "../App";
 
-const Products = ({notify}) => {
-  const productsData = useContext(ProductDataContext);
+const Products = () => {
+  const {productData} = useContext(ProductDataContext)
 
   return (
     <section className="grid grid-cols-2 gap-3">
-      {productsData.map((product) => {
-        return <ProductCard key={product.id} product={product} notify={notify}/>
-      })};
+      {productData.map((product) => {
+        return (
+          <ProductCard key={product.id} product={product} />
+        );
+      })}
     </section>
   );
 };

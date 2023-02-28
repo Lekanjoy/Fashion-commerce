@@ -1,24 +1,19 @@
 import React, {useState} from 'react'
-import {Link} from 'react-router-dom'
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast } from "react-toastify";
 import Header from './Header'
 import DisCountCard from './DisCountCard'
 import Products from './Products'
+import { ToastContainer } from 'react-toastify'
+import { useAuth } from '../firebase'
 
 const Home = () => {
-  const [cartNumber, setCartNumber] = useState(0);
-  // Toast Notification Handler
-  const notify = () => {
-    toast.success("Added to Cart!", {
-      pauseOnHover: false,
-    });
-    setCartNumber(prevState => prevState + 1);
-  };
+
+   const user = useAuth();
+   console.log(user);
+
   return (
     <div className="px-5 py-8 font-[quicksand] w-full">
-      <Header cartNumber={cartNumber}/>
-      <div className="mb-3">
+      <Header/>
+      <div className="mb-3 mt-12 ">
         <h1 className="text-xl font-bold">Hello Lexy</h1>
         <p className="text-gray-700 text-sm">What got your attention today?</p>
       </div>
@@ -27,7 +22,8 @@ const Home = () => {
         <DisCountCard />
         <DisCountCard />
       </div>
-      <Products notify={notify} />
+      <Products />
+      <ToastContainer/>
     </div>
   );
 }
