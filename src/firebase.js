@@ -28,11 +28,11 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const analytics = getAnalytics(app);
 
-// sigIn Auth with email
+// sigUp Auth with email
 export function signup(email, password) {
   return createUserWithEmailAndPassword(auth, email, password);
 }
-// sigUp Auth with email
+// sigIn Auth with email
 export function login(email, password) {
   return signInWithEmailAndPassword(auth, email, password);
 }

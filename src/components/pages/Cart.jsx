@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import backArrow from "../../assets/back-arrow.svg";
 import star from "../../assets/Star 4.svg";
@@ -8,8 +8,13 @@ import { toast, ToastContainer } from "react-toastify";
 
 
 const Cart = () => {
-  const { uniqueItems, handleAddToCart, handleRemoveFromCart, cartDetails } =
-    useContext(ProductDataContext);
+  const {
+    uniqueItems,
+    handleAddToCart,
+    handleRemoveFromCart,
+    cartDetails,
+    subTotalPrice,
+  } = useContext(ProductDataContext);
 
   // Navigate to previous page
   const navigate = useNavigate();
@@ -17,33 +22,23 @@ const Cart = () => {
     navigate(-1);
   };
 
-  // Get Subtotal price of Items in Cart
-  let subTotalArray = [];
-
-  cartDetails.forEach((item) => {
-    subTotalArray.push(item.price);
-  });
-
-  const subTotalPrice = subTotalArray.reduce(
-    (total, price) => total + price,
-    0
-  );
-
+  
+  
+  // Get Current User
   const user = useAuth();
 
   // Handle Checkout Button
   const handleCheckout = () => {
     if (user && cartDetails.length > 0) {
       navigate("/checkout");
-    } else if (user && cartDetails.length < 1) {
-      toast.error("Cart is Empty!", {
+    } else if ((user && cartDetails.length < 1) || (!user && cartDetails.length < 1)) {
+      toast.error("Please add product to cart!", {
         pauseOnHover: false,
       });
     } else {
       navigate("/login");
     }
   };
-
   return (
     <section className="px-[20px] pt-8 pb-64 relative">
       <img
@@ -71,15 +66,15 @@ const Cart = () => {
               key={cart.id}
               className="w-full bg-white shadow-md rounded-md mb-2 border flex justify-between gap-x-[20px] p-4"
             >
-              <div className="bg-[#C5EAEF] flex justify-center align-center  min-w-[137px] min-h-[120px] rounded-md ">
+              <dmaxiv className="bg-[#C5EAEF] flex justify-center align-center  max-w-[137px] max-h-[120px] rounded-md ">
                 <img src={cart.image} alt={cart.title} className="w-fit" />
-              </div>
+              </dmaxiv>
               <div className="text-[#303030]">
                 <h1 className="font-bold">{cart.title}</h1>
-                <p className="text-sm text-[rgba(48,_48,_48,_0.7)] mb-[11px]">
+                {/* <p className="text-sm text-[rgba(48,_48,_48,_0.7)] mb-[11px]">
                   {cart.description}
-                </p>
-                <div className="flex gap-x-1 mb-[15px]">
+                </p> */}
+                <div className="flex gap-x-1 mt-4 mb-[15px]">
                   <img src={star} alt="star icon" />
                   <img src={star} alt="star icon" />
                   <img src={star} alt="star icon" />
@@ -116,7 +111,12 @@ const Cart = () => {
       <footer className="bg-[#fefefe] flex flex-col  rounded-t-3xl border px-[20px] py-6 w-full h-[184px] fixed left-0 bottom-0 z-10">
         <div className="flex justify-between font-bold text-[#303030] text-lg">
           <h3>Total Items: {uniqueItems.length}</h3>
-          <h3>Total Price: ${subTotalPrice.toFixed(2)}</h3>
+          <div className="">
+            <h3>Total Price: ${subTotalPrice.toFixed(2)}</h3>
+            <p className="text-xs font-normal mt-1 text-[rgba(48,48,48,0.7)]">
+              Delivery fees not included
+            </p>
+          </div>
         </div>
         <div className="flex items-center justify-center">
           <button

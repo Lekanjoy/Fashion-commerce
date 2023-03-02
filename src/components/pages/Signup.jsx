@@ -1,14 +1,14 @@
 import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import { signup } from "../../firebase";
+import { signup, signInWithGooglePopup } from "../../firebase";
 
 const Signup = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
-  // Handle Signup With credentials
+  // Handle Signup With Email and Passsword
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const emailRef = useRef();
@@ -18,13 +18,17 @@ const Signup = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     if (passwordRef.current.value !== confirmPasswordRef.current.value) {
-      return alert("Passwords do not match");
+      // Toast Notification
+      toast.error("Passwords does not match!", {
+        pauseOnHover: false,
+      });
+      return;
     }
     setLoading(true);
     try {
       await signup(emailRef.current.value, confirmPasswordRef.current.value);
       // Toast Notification
-      toast.success("Sign Up Successful!", {
+      toast.success("SignUp Successful!", {
         pauseOnHover: false,
       });
       setTimeout(() => {
@@ -32,28 +36,39 @@ const Signup = () => {
       }, 5000);
     } catch (error) {
       // Toast Notification
-      toast.error("Sign Up Failed!", {
+      toast.error("SignUp Failed!", {
         pauseOnHover: false,
       });
       console.error(error);
     }
     setLoading(false);
   }
-  // const user = firebase.auth().currentUser;
 
-  // user.updateProfile({
-  //     displayName: `${firstNameRef.current.value} ${lastNameRef.current.value}}`,
-  //   })
-  //   .then((data) => {
-  //     console.log(data);
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //   });
+  // Handle Login with Google
+  async function handleSignupWithGoogle() {
+    setLoading(true);
+    try {
+      await signInWithGooglePopup();
+      // Toast Notification
+      toast.success("SignUp Successful", {
+        pauseOnHover: false,
+      });
+      setTimeout(() => {
+        navigate("/login");
+      }, 5000);
+    } catch (error) {
+      // Toast Notification
+      toast.error("SignUp Unsuccessful", {
+        pauseOnHover: false,
+      });
+      console.error(error);
+    }
+    setLoading(false);
+  }
 
   return (
-    <section className="bg-gray-100 w-full h-screen">
-      <div className=" max-w-md mx-auto my-10 bg-white p-5 rounded-md shadow-md">
+    <section className="bg-gray-100 px-6 w-full py-10 ">
+      <div className=" max-w-md mx-auto  bg-white p-5 rounded-md shadow-md">
         <h2 className="text-2xl font-bold mb-5">Sign Up</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -116,6 +131,7 @@ const Signup = () => {
             />
           </div>
           <button
+            disabled={loading}
             className="w-full px-4 py-2 text-white font-semibold bg-blue-500 rounded-md hover:bg-blue-600"
             type="submit"
           >
@@ -123,10 +139,12 @@ const Signup = () => {
           </button>
           <hr className="my-5 border-gray-300" />
           <button
+            onClick={handleSignupWithGoogle}
+            disabled={loading}
             className="w-full px-4 py-2 text-white font-semibold bg-red-500 rounded-md hover:bg-red-600"
             type="button"
           >
-            Signup with Google
+            SignUp with Google
           </button>
         </form>
         <p className="mt-5 text-center">
@@ -134,7 +152,6 @@ const Signup = () => {
           <Link
             to="/login"
             className="text-blue-500 font-semibold hover:underline"
-            href="#"
           >
             Log in
           </Link>

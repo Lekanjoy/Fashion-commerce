@@ -7,12 +7,13 @@ import ProductDetails from "./components/pages/ProductDetails";
 import Login from "./components/pages/Login";
 import Signup from "./components/pages/Signup";
 import Checkout from "./components/pages/Checkout";
+import ThankYouPage from "./components/pages/ThankYouPage";
 
 // Creating Context
 export const ProductDataContext = createContext();
 
 function App() {
-  const [Loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [productData, setProductData] = useState([]);
   const [cartDetails, setCartDetails] = useState([]);
 
@@ -27,7 +28,6 @@ function App() {
       })
       .catch((error) => console.error(error));
   }, []);
-
 
   // Add Item to Cart
   const handleAddToCart = (product) => {
@@ -61,16 +61,29 @@ function App() {
     const item = cartDetails.find((item) => item.title === name);
     return { ...item, quantity: itemCounts[name] };
   });
-  // console.log(uniqueItems);
+  // Get Subtotal price of Items in Cart
+  let subTotalArray = [];
+
+  cartDetails.forEach((item) => {
+    subTotalArray.push(item.price);
+  });
+
+  // Add all Prices in Cart together
+  const subTotalPrice = subTotalArray.reduce(
+    (total, price) => total + price,
+    0
+  );
 
   return (
     <ProductDataContext.Provider
       value={{
+        loading,
         productData,
         cartDetails,
         handleAddToCart,
         handleRemoveFromCart,
         uniqueItems,
+        subTotalPrice,
       }}
     >
       <Routes>
@@ -78,6 +91,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/payment_successful" element={<ThankYouPage />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/product/:info" element={<ProductDetails />} />
       </Routes>

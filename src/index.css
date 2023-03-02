@@ -8,3 +8,18 @@
         @apply bg-[#F2F2F2] rounded-full w-[34px] h-[34px] flex items-center justify-center text-xs
     }
 }
+nav{
+    /* set animation to slide from left when open and slide to right when closed */
+
+    animation: animate-slideLeft .8s ease-in-out;
+    
+}
+
+@keyframes animate-slideLeft {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}

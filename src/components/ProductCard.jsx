@@ -20,7 +20,7 @@ const ProductCard = ({ product }) => {
         </div>
       </Link>
       <div className="flex justify-between items-center mt-2">
-        <p className="font-medium text-sm text-[#303030]">{product.title}</p>
+        <p className="font-semibold text-left text-sm text-[#303030]">{product.title}</p>
         <div className="flex items-center text-[10px]">
           <img src={star} alt=" star icon" className="w-[8px]" />
           <i className="text-[rgba(48,48,48,0.7)]">{product.rating.rate}</i>
