@@ -4,16 +4,19 @@ import { PaystackButton } from "react-paystack";
 import { useAuth } from "../../firebase";
 import { ProductDataContext } from "../../App";
 
+
 const Checkout = () => {
-  const {  subTotalPrice } = useContext(ProductDataContext);
+  const { subTotalPrice } = useContext(ProductDataContext);
   const shippingPrice = 5;
   const totalPrice = subTotalPrice + shippingPrice;
   const navigate = useNavigate();
   const user = useAuth();
 
   // Credentials for Paystack
-  const publicKey = "pk_live_6dd6db63df72a6acd8e8556451ccfed108771b76";
-  const amount = 460.5 * totalPrice * 100;
+const publicKey = process.env.REACT_APP_PAYSTACK_PUBLIC_KEY;
+
+  const amount = 10000;
+  // const amount = 460.5 * totalPrice * 100;
   const email = user?.email;
 
   // Paystack Component Props
@@ -28,8 +31,10 @@ const Checkout = () => {
     onClose: () => navigate("/"),
   };
 
+  console.log(publicKey);
   return (
     <div className="bg-gray-100 py-10">
+      
       <div className="max-w-6xl mx-auto px-4">
         <div className="bg-white shadow-lg rounded-lg p-6">
           <h2 className="text-xl font-semibold mb-4">Checkout</h2>

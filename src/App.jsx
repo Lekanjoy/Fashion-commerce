@@ -20,10 +20,12 @@ function App() {
   // Getting Products Data from Backend
   useEffect(() => {
     setLoading(true);
-    fetch("https://fakestoreapi.com/products")
+    // fetch("https://fakestoreapi.com/products")
+    fetch("https://dummyjson.com/products/?skip=0&limit=100")
       .then((res) => res.json())
       .then((data) => {
-        setProductData(data);
+        setProductData(data.products);
+        console.log(data.products[8]);
         setLoading(false);
       })
       .catch((error) => console.error(error));

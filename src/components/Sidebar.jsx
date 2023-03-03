@@ -19,13 +19,17 @@ const Sidebar = () => {
   }
 
   return (
-    <nav className="absolute shadow-2xl  top-[65px] left-0 bg-white text-blue-500  p-6  h-[90vh]  w-2/3">
+    <nav className="absolute shadow-2xl  top-[65px] left-0 bg-[#28ADBF] text-[#fefefe]  p-6  h-[90vh]  w-2/3 md:w-52">
       <div className="flex mb-16">
-        <img className="w-12 h-12 rounded-full" src={user?.photoURL || null_user} alt="User profile image" />
+        <img
+          className="w-12 h-12 rounded-full"
+          src={user?.photoURL || null_user}
+          alt="User profile image"
+        />
         <div className="flex flex-col ml-4">
-          <h1 className="font-bold text-lg text-gray-400">@{user?.displayName}</h1>
+          <h1 className="font-semibold text-lg text-white">@{user?.displayName || 'User'}</h1>
           <p className="text-xs font-thin">{user?.email}</p>
-          </div>
+        </div>
       </div>
       <div className=" flex flex-col gap-y-8">
         <Link to="/">Home</Link>
@@ -38,7 +42,7 @@ const Sidebar = () => {
 
       <button
         onClick={handleLogOut}
-        className="bg-blue-400 text-white w-full mt-12 p-2 rounded-full font-bold hover:bg-blue-500"
+        className="bg-[#fefefe] text-[#28ADBF] w-full mt-12 p-2 rounded-full font-bold hover:bg-blue-100"
       >
         {user ? "Log Out" : "Log In"}
       </button>

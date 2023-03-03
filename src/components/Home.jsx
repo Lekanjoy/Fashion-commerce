@@ -23,7 +23,7 @@ const Home = () => {
       />
       <div className="mb-3 mt-12 ">
         <h1 className="text-xl font-bold">
-          Hello {user?.displayName || user?.email || "User"}
+          Hello, {user?.displayName || user?.email || "User"}
         </h1>
         <p className="text-gray-700 text-sm">What got your attention today?</p>
       </div>

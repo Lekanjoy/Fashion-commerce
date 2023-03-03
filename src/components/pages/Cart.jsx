@@ -48,16 +48,18 @@ const Cart = () => {
         className="w-[15px] h-[15px] mb-[34px] bg-white rounded-full cursor-pointer hover:scale-110"
       />
       {uniqueItems.length < 1 ? (
-        <div className="w-full h-full bg-white border shadow-md p-12 rounded-md flex flex-col gap-y-6 justify-center items-center md:max-w-[600px]">
-          <p className="text-[#303030] font-semibold animate-pulse">
-            Cart is Empty!
-          </p>
-          <Link
-            to="/"
-            className=" bg-teal-400 flex  w-fit p-2 rounded-md text-white text-sm hover:scale-105"
-          >
-            Continue Shopping
-          </Link>
+        <div className="w-full flex justify-center items-center">
+          <div className="w-full h-full bg-white border shadow-md p-12 rounded-md flex flex-col gap-y-6 justify-center items-center md:max-w-[600px]">
+            <p className="text-[#303030] font-semibold animate-bounce">
+              Cart is Empty!
+            </p>
+            <Link
+              to="/"
+              className=" bg-[#28ADBF] flex  w-fit p-2 rounded-md text-white text-sm hover:scale-105"
+            >
+              Continue Shopping
+            </Link>
+          </div>
         </div>
       ) : (
         uniqueItems.map((cart) => {
@@ -67,7 +69,7 @@ const Cart = () => {
               className="w-full bg-white shadow-md rounded-md mb-2 border flex justify-between gap-x-[20px] p-4"
             >
               <dmaxiv className="bg-[#C5EAEF] flex justify-center align-center  max-w-[137px] max-h-[120px] rounded-md ">
-                <img src={cart.image} alt={cart.title} className="w-fit" />
+                <img src={cart.images[0]} alt={cart.title} className="w-fit" />
               </dmaxiv>
               <div className="text-[#303030]">
                 <h1 className="font-bold">{cart.title}</h1>
@@ -80,7 +82,7 @@ const Cart = () => {
                   <img src={star} alt="star icon" />
                   <img src={star} alt="star icon" />
                   <img src={star} alt="star icon" />
-                  <p className="text-sm">{cart.rating.rate}</p>
+                  <p className="text-sm">{cart.rating}</p>
                 </div>
                 <div className="flex gap-x-6">
                   <p className="font-semibold text-[20px]">${cart.price}</p>

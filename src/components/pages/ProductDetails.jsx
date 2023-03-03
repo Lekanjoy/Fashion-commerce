@@ -40,23 +40,23 @@ const ProductDetails = () => {
           </p>
         </Link>
       </div>
-      <h1 className="font-bold text-[#303030] mt-12">{productInfo.title}</h1>
-      <p className="text-xs max-w-[250px] text-[rgba(48,_48,_48,_0.7)] mb-[10px]">
+      <h1 className="font-bold text-[#303030] my-12">{productInfo.title}</h1>
+      {/* <p className="text-xs max-w-[250px] text-[rgba(48,_48,_48,_0.7)] mb-[10px]">
         {productInfo.description}
-      </p>
-      <div className="w-full h-[200px]">
+      </p> */}
+      <div className="w-full h-[200px] flex items-center justify-center">
         <img
-          src={productInfo.image}
+          src={productInfo.thumbnail}
           alt={productInfo.name}
-          className="h-full w-full"
+          className="h-full object-contain rounded-sm"
         />
       </div>
-      <div className="flex justify-center gap-x-[20px] mb-[20px] mt-[20px]">
+      {/* <div className="flex justify-center gap-x-[20px] mb-[20px] mt-[20px]">
         <p className="size">38</p>
         <p className="size">40</p>
         <p className="size">42</p>
         <p className="size">44</p>
-      </div>
+      </div> */}
       <footer className="bg-[#fefefe] flex flex-col rounded-t-3xl border px-[20px] py-6 w-full h-[40vh] fixed left-0 bottom-0 z-10">
         <div className="flex justify-between">
           <h1 className="text-[#303030] text-lg font-bold">
