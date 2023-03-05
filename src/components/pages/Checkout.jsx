@@ -13,11 +13,12 @@ const Checkout = () => {
   const user = useAuth();
 
   // Credentials for Paystack
-const publicKey = process.env.REACT_APP_PAYSTACK_PUBLIC_KEY;
+  const publicKey = import.meta.env.VITE_REACT_APP_PAYSTACK_PUBLIC_KEY;
 
-  const amount = 10000;
-  // const amount = 460.5 * totalPrice * 100;
+  const amount =Math.round(totalPrice * 460.5 * 100);
   const email = user?.email;
+
+  console.log(amount);
 
   // Paystack Component Props
   const componentProps = {
@@ -31,14 +32,13 @@ const publicKey = process.env.REACT_APP_PAYSTACK_PUBLIC_KEY;
     onClose: () => navigate("/"),
   };
 
-  const [storedAddress, setStoredAddress] = useState('')
-    useEffect(() => {
-      const storedAddress = localStorage.getItem("address");
-      if ( storedAddress) {
-        setStoredAddress(storedAddress);
-      }
-    }, []);
-
+  const [storedAddress, setStoredAddress] = useState("");
+  useEffect(() => {
+    const storedAddress = localStorage.getItem("address");
+    if (storedAddress) {
+      setStoredAddress(storedAddress);
+    }
+  }, []);
 
   return (
     <div className="bg-gray-100 py-10 mt-12">

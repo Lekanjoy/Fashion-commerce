@@ -31,7 +31,7 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         setProductData(data.products);
-        console.log(data.products[8]);
+        // console.log(data.products[8]);
         setLoading(false);
       })
       .catch((error) => console.error(error));

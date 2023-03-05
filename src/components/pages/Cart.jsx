@@ -40,7 +40,7 @@ const Cart = () => {
     }
   };
   return (
-    <section className="px-[20px] pt-8 pb-64 relative">
+    <section className="px-[20px] pt-8 mt-12 pb-64 relative">
       {/* <img
         onClick={handleBack}
         src={backArrow}
