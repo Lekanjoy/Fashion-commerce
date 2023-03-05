@@ -41,15 +41,15 @@ const Cart = () => {
   };
   return (
     <section className="px-[20px] pt-8 pb-64 relative">
-      <img
+      {/* <img
         onClick={handleBack}
         src={backArrow}
         alt="back arrow icon"
         className="w-[15px] h-[15px] mb-[34px] bg-white rounded-full cursor-pointer hover:scale-110"
-      />
+      /> */}
       {uniqueItems.length < 1 ? (
-        <div className="w-full flex justify-center items-center">
-          <div className="w-full h-full bg-white border shadow-md p-12 rounded-md flex flex-col gap-y-6 justify-center items-center md:max-w-[600px]">
+        <div className="w-full mt-[64px] flex justify-center items-center">
+          <div className="w-full h-full bg-gray-100 border shadow-md p-12 rounded-md flex flex-col gap-y-6 justify-center items-center md:max-w-[600px]">
             <p className="text-[#303030] font-semibold animate-bounce">
               Cart is Empty!
             </p>
@@ -123,7 +123,7 @@ const Cart = () => {
         <div className="flex items-center justify-center">
           <button
             onClick={handleCheckout}
-            className="mt-12 bg-[#28ADBF] w-[285px]  text-white font-semibold rounded-sm px-[93px] py-[13px]"
+            className="mt-12 bg-[#28ADBF] w-full  text-white font-semibold rounded-sm px-[93px] py-[13px]"
           >
             Checkout
           </button>

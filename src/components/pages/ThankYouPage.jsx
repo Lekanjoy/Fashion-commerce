@@ -4,7 +4,7 @@ import illustration from '../../assets/sammy-line-finance.gif'
 
 function ThankYouPage() {
   return (
-    <div className="flex flex-col items-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen">
       <img src={illustration} alt="Success illustration" />
       <h1 className="text-3xl font-bold mb-1 text-[#28ADBF] text-center">
         Thank you for your purchase!

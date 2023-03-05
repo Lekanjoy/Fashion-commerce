@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { PaystackButton } from "react-paystack";
 import { useAuth } from "../../firebase";
 import { ProductDataContext } from "../../App";
@@ -7,7 +7,7 @@ import { ProductDataContext } from "../../App";
 
 const Checkout = () => {
   const { subTotalPrice } = useContext(ProductDataContext);
-  const shippingPrice = 5;
+  const shippingPrice = 3.25;
   const totalPrice = subTotalPrice + shippingPrice;
   const navigate = useNavigate();
   const user = useAuth();
@@ -31,10 +31,17 @@ const publicKey = process.env.REACT_APP_PAYSTACK_PUBLIC_KEY;
     onClose: () => navigate("/"),
   };
 
-  console.log(publicKey);
+  const [storedAddress, setStoredAddress] = useState('')
+    useEffect(() => {
+      const storedAddress = localStorage.getItem("address");
+      if ( storedAddress) {
+        setStoredAddress(storedAddress);
+      }
+    }, []);
+
+
   return (
-    <div className="bg-gray-100 py-10">
-      
+    <div className="bg-gray-100 py-10 mt-12">
       <div className="max-w-6xl mx-auto px-4">
         <div className="bg-white shadow-lg rounded-lg p-6">
           <h2 className="text-xl font-semibold mb-4">Checkout</h2>
@@ -42,15 +49,13 @@ const publicKey = process.env.REACT_APP_PAYSTACK_PUBLIC_KEY;
             <div className="w-full md:w-1/2 md:pr-4 mb-4 md:mb-0">
               <h3 className="text-lg font-semibold mb-2">Shipping address</h3>
               <p className="text-gray-700 mb-2">
-                John Doe
+                {user?.displayName || email}
                 <br />
-                123 Main St
-                <br />
-                Anytown, USA 12345
+                {storedAddress}
               </p>
-              <button className="text-blue-500 hover:text-blue-600">
+              <Link to="/profile" className="text-blue-500 hover:text-blue-600">
                 Change
-              </button>
+              </Link>
             </div>
             <div className="w-full md:w-1/2">
               <h3 className="text-lg font-semibold mb-2">Delivery method</h3>
@@ -60,7 +65,10 @@ const publicKey = process.env.REACT_APP_PAYSTACK_PUBLIC_KEY;
                   Estimated delivery date: March 15, 2023
                 </p>
               </div>
-              <button className="text-blue-500 hover:text-blue-600">
+              <button
+                to="/profile"
+                className="text-blue-500 hover:text-blue-600"
+              >
                 Change
               </button>
             </div>

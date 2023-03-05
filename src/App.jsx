@@ -8,19 +8,25 @@ import Login from "./components/pages/Login";
 import Signup from "./components/pages/Signup";
 import Checkout from "./components/pages/Checkout";
 import ThankYouPage from "./components/pages/ThankYouPage";
+import Header from "./components/Header";
+import Profile from "./components/pages/Profile";
 
 // Creating Context
 export const ProductDataContext = createContext();
 
 function App() {
+  const [showNav, setShowNav] = useState(false);
   const [loading, setLoading] = useState(false);
   const [productData, setProductData] = useState([]);
-  const [cartDetails, setCartDetails] = useState([]);
+  const [cartDetails, setCartDetails] = useState([]); 
+
+  // SideBar Toggle Function
+  const toggleSideBar = () => setShowNav((prevState) => !prevState);
+
 
   // Getting Products Data from Backend
   useEffect(() => {
     setLoading(true);
-    // fetch("https://fakestoreapi.com/products")
     fetch("https://dummyjson.com/products/?skip=0&limit=100")
       .then((res) => res.json())
       .then((data) => {
@@ -75,7 +81,7 @@ function App() {
     (total, price) => total + price,
     0
   );
-
+  
   return (
     <ProductDataContext.Provider
       value={{
@@ -88,11 +94,17 @@ function App() {
         subTotalPrice,
       }}
     >
+      <Header
+        showNav={showNav}
+        setShowNav={setShowNav}
+        toggleSideBar={toggleSideBar}
+      />
       <Routes>
         <Route index element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/payment_successful" element={<ThankYouPage />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/product/:info" element={<ProductDetails />} />

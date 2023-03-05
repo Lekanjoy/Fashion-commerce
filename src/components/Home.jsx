@@ -1,26 +1,16 @@
 import React, { useState } from "react";
-import Header from "./Header";
 import DisCountCard from "./DisCountCard";
 import Products from "./Products";
 import { ToastContainer } from "react-toastify";
 import { useAuth } from "../firebase";
 
 const Home = () => {
-  const [showNav, setShowNav] = useState(false);
-
-  // SideBar Toggle Function
-  const toggleSideBar = () => setShowNav((prevState) => !prevState);
 
   // Get Current User
   const user = useAuth();
 
   return (
-    <main className="px-5 py-8 font-[quicksand] w-full">
-      <Header
-        showNav={showNav}
-        setShowNav={setShowNav}
-        toggleSideBar={toggleSideBar}
-      />
+    <main className="px-5 py-8 mt-8 font-[quicksand] w-full">
       <div className="mb-3 mt-12 ">
         <h1 className="text-xl font-bold">
           Hello, {user?.displayName || user?.email || "User"}

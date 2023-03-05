@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { ProductDataContext } from "../App";
-import { useAuth } from "../firebase";
 import hamburger from '../assets/hamburger.svg'
 import search from '../assets/search.svg'
 import cart from "../assets/cart.svg";
@@ -11,12 +10,8 @@ const Header = ({showNav, toggleSideBar}) => {
   const { uniqueItems } = useContext(ProductDataContext);
   let cartProductSize = uniqueItems.length;
 
-   // Get Current User
-  const user = useAuth();
-
-
   return (
-    <header className="flex fixed justify-between cursor-pointer items-center shadow-md top-0 p-4 left-0 w-full h-[10vh] bg-[#fefefe] z-10">
+    <header className="flex fixed justify-between cursor-pointer items-center shadow-md top-0 p-4 left-0 w-full h-[50px] bg-[#fefefe] z-30">
       <img
         className="w-5 h-5"
         onClick={toggleSideBar}
@@ -32,7 +27,7 @@ const Header = ({showNav, toggleSideBar}) => {
           </p>
         </Link>
       </div>
-      {showNav && <Sidebar />}
+      {showNav && <Sidebar toggleSideBar={toggleSideBar}/>}
     </header>
   );
 };

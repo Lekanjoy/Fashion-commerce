@@ -1,9 +1,14 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import null_user from '../assets/null_user.svg'
 import { logOut, useAuth } from "../firebase";
+import home from "../assets/home.svg";
+import profile from "../assets/profile.svg";
+import orders from "../assets/orders.svg";
+import about from "../assets/about.svg";
+import support from "../assets/support.svg";
+import faq from "../assets/faq.svg";
 
-const Sidebar = () => {
+const Sidebar = ({ toggleSideBar }) => {
   // Get Current User
   const user = useAuth();
   // Handle Log out
@@ -19,25 +24,63 @@ const Sidebar = () => {
   }
 
   return (
-    <nav className="absolute shadow-2xl  top-[65px] left-0 bg-[#28ADBF] text-[#fefefe]  p-6  h-[90vh]  w-2/3 md:w-52">
-      <div className="flex mb-16">
-        <img
-          className="w-12 h-12 rounded-full"
-          src={user?.photoURL || null_user}
-          alt="User profile image"
-        />
-        <div className="flex flex-col ml-4">
-          <h1 className="font-semibold text-lg text-white">@{user?.displayName || 'User'}</h1>
-          <p className="text-xs font-thin">{user?.email}</p>
-        </div>
-      </div>
+    <nav className="absolute flex flex-col justify-center  shadow-2xl top-[50px] left-0 bg-[#28ADBF] text-[#fefefe]  p-6  h-[100vh]  w-2/3 md:w-52">
       <div className=" flex flex-col gap-y-8">
-        <Link to="/">Home</Link>
-        <Link to="">Profile</Link>
-        <Link to="">Orders</Link>
-        <Link to="">About Us</Link>
-        <Link to="">Support</Link>
-        <Link to="">FAQ</Link>
+        <Link
+          className="flex gap-x-2 items-center"
+          onClick={toggleSideBar}
+          to="/"
+        >
+          <img className="w-6" src={home} alt="Home Icon" />
+          <p>Home</p>
+        </Link>
+        {user && (
+          <Link
+            className="flex gap-x-2 items-center"
+            onClick={toggleSideBar}
+            to="/profile"
+          >
+            <img className="w-6" src={profile} alt="Home Icon" />
+
+            <p>Profile</p>
+          </Link>
+        )}
+        <Link
+          className="flex gap-x-2 items-center"
+          onClick={toggleSideBar}
+          to=""
+        >
+          <img className="w-6" src={orders} alt="Home Icon" />
+
+          <p>Orders</p>
+        </Link>
+        <Link
+          className="flex gap-x-2 items-center"
+          onClick={toggleSideBar}
+          to=""
+        >
+          <img className="w-6" src={about} alt="Home Icon" />
+
+          <p>About Us</p>
+        </Link>
+        <Link
+          className="flex gap-x-2 items-center"
+          onClick={toggleSideBar}
+          to=""
+        >
+          <img className="w-6" src={support} alt="Home Icon" />
+
+          <p>Support</p>
+        </Link>
+        <Link
+          className="flex gap-x-2 items-center"
+          onClick={toggleSideBar}
+          to=""
+        >
+          <img className="w-6" src={faq} alt="Home Icon" />
+
+          <p>FAQ</p>
+        </Link>
       </div>
 
       <button
