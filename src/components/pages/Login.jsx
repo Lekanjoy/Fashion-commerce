@@ -33,7 +33,7 @@ const Login = () => {
     setLoading(false);
   }
 // Handle Login with Google
-    async function handleSignupWithGoogle() {
+    async function handleLoginWithGoogle() {
       setLoading(true);
       try {
         await signInWithGooglePopup();
@@ -60,7 +60,7 @@ const Login = () => {
         <h2 className="text-2xl font-bold mb-5">Login</h2>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
-            <label class="block font-semibold mb-2" for="email">
+            <label className="block font-semibold mb-2" htmlFor="email">
               Email
             </label>
             <input
@@ -71,7 +71,7 @@ const Login = () => {
             />
           </div>
           <div className="mb-4">
-            <label className="block font-semibold mb-2" for="password">
+            <label className="block font-semibold mb-2" htmlFor="password">
               Password
             </label>
             <input
@@ -90,7 +90,7 @@ const Login = () => {
           </button>
           <hr className="my-5 border-gray-300" />
           <button
-          onClick={handleSignupWithGoogle}
+          onClick={handleLoginWithGoogle}
             disabled={loading}
             className="w-full px-4 py-2 text-white font-semibold bg-red-500 rounded-md hover:bg-red-600"
             type="button"

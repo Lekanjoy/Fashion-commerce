@@ -44,7 +44,7 @@ const Signup = () => {
     setLoading(false);
   }
 
-  // Handle Login with Google
+  // Handle Sign up  with Google
   async function handleSignupWithGoogle() {
     setLoading(true);
     try {

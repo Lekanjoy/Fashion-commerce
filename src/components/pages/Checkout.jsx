@@ -14,11 +14,8 @@ const Checkout = () => {
 
   // Credentials for Paystack
   const publicKey = import.meta.env.VITE_REACT_APP_PAYSTACK_PUBLIC_KEY;
-
   const amount =Math.round(totalPrice * 460.5 * 100);
   const email = user?.email;
-
-  console.log(amount);
 
   // Paystack Component Props
   const componentProps = {

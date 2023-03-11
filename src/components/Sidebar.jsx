@@ -18,6 +18,7 @@ const Sidebar = ({ toggleSideBar }) => {
     try {
       await logOut();
       navigate("/login");
+      toggleSideBar();
     } catch (error) {
       alert("LogOut Unsuccessful");
     }

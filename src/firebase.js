@@ -14,14 +14,14 @@ import {
 } from "firebase/auth";
 
  export const firebaseConfig = {
-  apiKey: "AIzaSyB7QrkZOqQD-uBw0R9jwIKoYoKIaNPXyEw",
-  authDomain: "lexy-store-react.firebaseapp.com",
-  projectId: "lexy-store-react",
-  storageBucket: "lexy-store-react.appspot.com",
-  messagingSenderId: "67041657432",
-  appId: "1:67041657432:web:64c52dc34c4ca773a2802d",
-  measurementId: "G-ZK3V8GN8YM",
-};
+   apiKey: import.meta.env.VITE_REACT_APP_FIREBASE_API_KEY,
+   authDomain: import.meta.env.VITE_REACT_APP_FIREBASE_AUTH_DOMAIN,
+   projectId: import.meta.env.VITE_REACT_APP_FIREBASE_PROJECT_ID,
+   storageBucket: import.meta.env.VITE_REACT_APP_FIREBASE_STORAGE_BUCKET,
+   messagingSenderId: import.meta.env.VITE_REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+   appId: import.meta.env.VITE_REACT_APP_FIREBASE_APP_ID,
+   measurementId: import.meta.env.VITE_REACT_APP_FIREBASE_MEASUREMENT_ID,
+ };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -41,7 +41,7 @@ export function logOut() {
 }
 
 // Signin with google redirect
-export function signInWithGoogle() {
+export function signInWithGoogleRedirect() {
   const provider = new GoogleAuthProvider();
   return signInWithRedirect(auth, provider);
 }
