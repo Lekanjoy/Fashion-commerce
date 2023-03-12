@@ -7,23 +7,45 @@
     .size {
         @apply bg-[#F2F2F2] rounded-full w-[34px] h-[34px] flex items-center justify-center text-xs
     }
+    .slide{
+        @apply sliding-item min-w-[357px] sliding-item bg-blue-300 flex justify-between px-6 py-4 gap-x-4 rounded-md md:min-w-[50%]
+    }
 }
-nav{
-    /* set animation to slide from left when open and slide to right when closed */
-
-    animation: animate-slideLeft .8s ease-in-out;
+@layer base{
+    *{
+        -webkit-tap-highlight-color: transparent;
+    }
+    nav {
+            animation: animate-slideLeft .8s ease-in-out;
+        }
     
-}
+        @keyframes animate-slideLeft {
+            from {
+                transform: translateX(-100%);
+            }
+    
+            to {
+                transform: translateX(0);
+            }
+        }
+    
+        input {
+            border-radius: 2px;
+            outline: none;
+        }
+    
+        .sliding-item {
+            animation: slide 20s linear infinite;
+        }
+    
+        @keyframes slide {
+            0% {
+                transform: translateX(0%);
+            }
+    
+            100% {
+                transform: translateX(-200%);
+            }
+        }
 
-@keyframes animate-slideLeft {
-    from {
-        transform: translateX(-100%);
-    }
-    to {
-        transform: translateX(0);
-    }
-}
-input{
-    border-radius: 2px;
-    outline: none;
 }

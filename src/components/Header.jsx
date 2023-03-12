@@ -2,11 +2,11 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { ProductDataContext } from "../App";
-import hamburger from '../assets/hamburger.svg'
-import search from '../assets/search.svg'
+import hamburger from "../assets/hamburger.svg";
+import search from "../assets/search.svg";
 import cart from "../assets/cart.svg";
 
-const Header = ({showNav, toggleSideBar}) => {
+const Header = ({ showNav, toggleSideBar, setSearchTerm }) => {
   const { uniqueItems } = useContext(ProductDataContext);
   let cartProductSize = uniqueItems.length;
 
@@ -19,7 +19,16 @@ const Header = ({showNav, toggleSideBar}) => {
         alt="hamburger menu"
       />
       <div className="flex items-center gap-x-3 relative">
-        <img className="w-5 h-5 rounded-full" src={search} alt="search icon" />
+        <input
+          onChange={(e) => setSearchTerm(e.target.value)}
+          type="search"
+          className=" bg-transparent cursor-pointer py-1 px-3 w-8 ease-in-out focus:border focus:w-full focus:border-[#28ADBF]"
+        />
+        <img
+          className="w-6 h-6 rounded-full absolute -z-10 right-[38px] top-[6px] "
+          src={search}
+          alt="search icon"
+        />
         <Link to="/cart">
           <img className="w-5 h-5" src={cart} alt="Cart details icon" />
           <p className="text-white bg-red-500 w-4 h-4 text-center font-semibold border-2 border-[#28ADBF] rounded-full text-[10px] -top-2 -right-2 absolute">
@@ -27,7 +36,7 @@ const Header = ({showNav, toggleSideBar}) => {
           </p>
         </Link>
       </div>
-      {showNav && <Sidebar toggleSideBar={toggleSideBar}/>}
+      {showNav && <Sidebar toggleSideBar={toggleSideBar} />}
     </header>
   );
 };

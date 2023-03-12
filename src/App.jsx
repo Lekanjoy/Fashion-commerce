@@ -20,6 +20,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [productData, setProductData] = useState([]);
   const [cartDetails, setCartDetails] = useState([]); 
+  const [searchTerm, setSearchTerm] = useState('')
 
   // SideBar Toggle Function
   const toggleSideBar = () => setShowNav((prevState) => !prevState);
@@ -28,15 +29,16 @@ function App() {
   // Getting Products Data from Backend
   useEffect(() => {
     setLoading(true);
-    fetch("https://dummyjson.com/products/?skip=0&limit=100")
+    fetch(
+      `https://dummyjson.com/products/search?q=${searchTerm}&limit=100&skip=0`
+    )
       .then((res) => res.json())
       .then((data) => {
         setProductData(data.products);
-        // console.log(data.products[8]);
         setLoading(false);
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [searchTerm]);
 
   // Add Item to Cart
   const handleAddToCart = (product) => {
@@ -100,6 +102,7 @@ function App() {
           showNav={showNav}
           setShowNav={setShowNav}
           toggleSideBar={toggleSideBar}
+          setSearchTerm={setSearchTerm}
         />
         <Routes>
           <Route index element={<Home />} />
@@ -107,7 +110,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/payment_successful" element={<ThankYouPage/>} />
+          <Route path="/payment_successful" element={<ThankYouPage />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:info" element={<ProductDetails />} />
         </Routes>
