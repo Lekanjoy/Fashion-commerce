@@ -17,11 +17,11 @@ const ProductCard = ({ productData }) => {
         >
           <Link to={`/product/${product.id}`}>
             {/* Navigates to unque product page details when clicked on image */}
-            <div className=" rounded w-full h-[100px] bg- p-2 border border-[#2badbf]">
+            <div className=" rounded w-full h-[180px] bg- p-2 border ">
               <img
                 src={product.images[0]}
                 alt={product.title}
-                className="min-w-[100%] max-w-full max-h-full bg-transparent w-full h-full object-contain"
+                className="bg-transparent w-full h-full "
               />
             </div>
           </Link>

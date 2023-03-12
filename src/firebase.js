@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 
@@ -26,6 +25,7 @@ import {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
+
 
 // sigUp Auth with email
 export function signup(email, password) {

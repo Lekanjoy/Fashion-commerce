@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import { signup, signInWithGooglePopup } from "../../firebase";
+import { signup, signInWithGooglePopup, } from "../../firebase";
 
 const Signup = () => {
   const [loading, setLoading] = useState(false);
@@ -44,6 +44,8 @@ const Signup = () => {
     setLoading(false);
   }
 
+
+
   // Handle Sign up  with Google
   async function handleSignupWithGoogle() {
     setLoading(true);
@@ -67,11 +69,11 @@ const Signup = () => {
   }
 
   return (
-    <section className="bg-gray-100 px-6 w-full py-10 ">
+    <section className="bg-gray-100 px-6 w-full py-10 mt-10">
       <div className=" max-w-md mx-auto  bg-white p-5 rounded-md shadow-md">
         <h2 className="text-2xl font-bold mb-5">Sign Up</h2>
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="block font-semibold mb-2" htmlFor="email">
               First Name
             </label>
@@ -92,7 +94,7 @@ const Signup = () => {
               type="text"
               required
             />
-          </div>
+          </div> */}
           <div className="mb-4">
             <label className="block font-semibold mb-2" htmlFor="email">
               Email

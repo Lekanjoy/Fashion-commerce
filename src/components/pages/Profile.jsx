@@ -1,16 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useAuth, logOut } from "../../firebase";
+import { updateProfile } from "firebase/auth";
 import null_user from "../../assets/null_user.svg";
 import phoneNum from "../../assets/phone.svg";
 import addressIcon from "../../assets/address.svg";
+
+
 const Profile = () => {
-  // Get Current User
-  const user = useAuth();
   // Handle Log out
   const navigate = useNavigate();
 
+  // Get User Account Created and updating name to firebase
+  const user = useAuth();
+
+  const displayNameRef = useRef();
+  const displayEmailRef = useRef();
+
+  const [showForm, setShowForm] = useState(false);
+  const [showDetails, setShowDetails] = useState(true);
+
+  const [displayName, setDisplayName] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [displayEmail, setDisplayEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [storedPhoneNumber, setStoredPhoneNumber] = useState("");
+  const [storedAddress, setStoredAddress] = useState("");
+
+  // Logout
   async function handleLogOut() {
     try {
       await logOut();
@@ -20,14 +40,8 @@ const Profile = () => {
     }
   }
 
-  const [showForm, setShowForm] = useState(false);
-  const [showDetails, setShowDetails] = useState(true);
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [storedPhoneNumber, setStoredPhoneNumber] = useState("");
-  const [storedAddress, setStoredAddress] = useState("");
-
-  const handleEditProfile = () => {
+  // Toggles between edit form and profile card
+  const handleEditUIChange = () => {
     setShowDetails((prevState) => !prevState);
     setShowForm((prevState) => !prevState);
   };
@@ -39,24 +53,52 @@ const Profile = () => {
       setStoredPhoneNumber(storedPhoneNumber);
       setStoredAddress(storedAddress);
     }
-  }, []);
 
-  const handleSubmit = (e) => {
+    setDisplayName(user?.displayName);
+    setDisplayEmail(user?.email);
+
+  }, [user]);
+
+  // User's Profile update/edit
+  const handleProfileUpdate = (e) => {
     e.preventDefault();
     //  Verify if phone and address field is not empty before editing
-    if (phone === "" || address === "") {
+    if (phone.trim() === "" || address.trim() === "" || name.trim() === "" || email.trim() === "") {
       alert("Please fill all fields");
       return;
-    };
+    }
 
-    localStorage.setItem("phone", phone);
-    localStorage.setItem("address", address);
-    setStoredPhoneNumber(phone);
-    setStoredAddress(address);
-    handleEditProfile();
-    toast.success("Edited Successfully!", {
-      pauseOnHover: false,
-    });
+    try {
+      // updates/edit user data in firebase
+      updateProfile(user, {
+        displayName: name,
+        email: email,
+      })
+        .then(() => {
+          setDisplayName(name);
+          setDisplayEmail(email);
+          console.log("User profile updated successfully");
+        })
+        .catch((error) => {
+          console.error("Error updating user profile: ", error);
+        });
+
+      // Setting Phone Number and Address to Localstorage of device
+      localStorage.setItem("phone", phone);
+      localStorage.setItem("address", address);
+      setStoredPhoneNumber(phone);
+      setStoredAddress(address);
+      handleEditUIChange();
+      // Toast Notification if successful
+      toast.success("Edited Successfully!", {
+        pauseOnHover: false,
+      });
+    } catch (error) {
+      // Toast Notification if unsuccessful
+      toast.error("Edit Unsuccessful", {
+        pauseOnHover: false,
+      });
+    }
   };
 
   return (
@@ -71,13 +113,13 @@ const Profile = () => {
             />
             <div className="">
               <h1 className="font-bold text-lg text-[#303030]">
-                {user?.displayName}
+                {displayName}
               </h1>
               <h2 className="text-sm italic  text-[rgba(48,48,48,0.7)]">
-                {user?.email}
+                {displayEmail}
               </h2>
               <button
-                onClick={handleEditProfile}
+                onClick={handleEditUIChange}
                 className="mt-4 bg-green-600 text-white rounded-sm py-1 px-6"
               >
                 Edit Profile
@@ -105,7 +147,8 @@ const Profile = () => {
 
       {showForm && (
         <form
-          onSubmit={handleSubmit}
+        autoComplete="true"
+          onSubmit={handleProfileUpdate}
           className="w-full flex border shadow-md p-4 rounded-md flex-col gap-y-3 mt-12 md:max-w-md lg:max-w-lg"
         >
           <div className=" flex flex-col gap-y-2 mb-3 justify-center items-center">
@@ -120,20 +163,22 @@ const Profile = () => {
             <label htmlFor="name">Name:</label>
             <input
               className="border py-2"
-              value={user?.displayName}
+              ref={displayNameRef}
+              onChange={() => setName(displayNameRef.current.value)}
+              defaultValue={displayName}
               id="name"
               type="text"
-              disabled
             />
           </div>
           <div className="flex flex-col gap-y-1">
             <label htmlFor="email">Email:</label>
             <input
               className="border py-2"
-              value={user?.email}
+              ref={displayEmailRef}
+              onChange={() => setEmail(displayEmailRef.current.value)}
+              defaultValue={displayEmail}
               id="email"
               type="email"
-              disabled
             />
           </div>
           <div className="flex flex-col gap-y-1">
@@ -144,6 +189,7 @@ const Profile = () => {
               value={phone}
               id="phone"
               type="tel"
+              autoFocus
             />
           </div>
           <div className="flex flex-col gap-y-1">

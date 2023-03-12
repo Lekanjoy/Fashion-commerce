@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { toast } from "react-toastify";
+import ErrorBoundary from "./components/ErrorBoundary";
 import Home from "./components/Home";
 import Cart from "./components/pages/Cart";
 import ProductDetails from "./components/pages/ProductDetails";
@@ -83,33 +84,35 @@ function App() {
   );
   
   return (
-    <ProductDataContext.Provider
-      value={{
-        loading,
-        productData,
-        cartDetails,
-        handleAddToCart,
-        handleRemoveFromCart,
-        uniqueItems,
-        subTotalPrice,
-      }}
-    >
-      <Header
-        showNav={showNav}
-        setShowNav={setShowNav}
-        toggleSideBar={toggleSideBar}
-      />
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/payment_successful" element={<ThankYouPage />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/product/:info" element={<ProductDetails />} />
-      </Routes>
-    </ProductDataContext.Provider>
+    <ErrorBoundary>
+      <ProductDataContext.Provider
+        value={{
+          loading,
+          productData,
+          cartDetails,
+          handleAddToCart,
+          handleRemoveFromCart,
+          uniqueItems,
+          subTotalPrice,
+        }}
+      >
+        <Header
+          showNav={showNav}
+          setShowNav={setShowNav}
+          toggleSideBar={toggleSideBar}
+        />
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/payment_successful" element={<ThankYouPage/>} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/product/:info" element={<ProductDetails />} />
+        </Routes>
+      </ProductDataContext.Provider>
+    </ErrorBoundary>
   );
 }
 
