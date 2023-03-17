@@ -81,7 +81,7 @@ function App() {
 
   // Add all Prices in Cart together
   const subTotalPrice = subTotalArray.reduce(
-    (total, price) => total + price,
+    (a, b) => a + b,
     0
   );
   

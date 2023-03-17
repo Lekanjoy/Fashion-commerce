@@ -40,13 +40,15 @@ const Cart = () => {
     }
   };
   return (
-    <section className="px-[20px] pt-8 mt-12 pb-64 relative">
-      {/* <img
-        onClick={handleBack}
-        src={backArrow}
-        alt="back arrow icon"
-        className="w-[15px] h-[15px] mb-[34px] bg-white rounded-full cursor-pointer hover:scale-110"
-      /> */}
+    <section className="px-[20px] bg-[#FDFBFB] pt-4 mt-12 pb-64 relative">
+      <div className="w-[30px] h-[30px] flex justify-center items-center mb-6 bg-[rgba(225,225,225,0.2)] rounded-[100%] cursor-pointer hover:scale-110">
+        <img
+          onClick={handleBack}
+          src={backArrow}
+          alt="back arrow icon"
+          className="w-[15px] h-[15px]"
+        />
+      </div>
       {uniqueItems.length < 1 ? (
         <div className="w-full mt-[64px] flex justify-center items-center">
           <div className="w-full h-full bg-gray-100 border shadow-md p-12 rounded-md flex flex-col gap-y-6 justify-center items-center md:max-w-[600px]">
@@ -73,9 +75,6 @@ const Cart = () => {
               </dmaxiv>
               <div className="text-[#303030]">
                 <h1 className="font-bold">{cart.title}</h1>
-                {/* <p className="text-sm text-[rgba(48,_48,_48,_0.7)] mb-[11px]">
-                  {cart.description}
-                </p> */}
                 <div className="flex gap-x-1 mt-4 mb-[15px]">
                   <img src={star} alt="star icon" />
                   <img src={star} alt="star icon" />

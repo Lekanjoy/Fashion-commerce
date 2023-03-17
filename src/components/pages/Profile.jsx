@@ -62,7 +62,7 @@ const Profile = () => {
   // User's Profile update/edit
   const handleProfileUpdate = (e) => {
     e.preventDefault();
-    //  Verify if phone and address field is not empty before editing
+    //  Verify user credentials field is not empty before editing
     if (phone.trim() === "" || address.trim() === "" || name.trim() === "" || email.trim() === "") {
       alert("Please fill all fields");
       return;
@@ -102,9 +102,9 @@ const Profile = () => {
   };
 
   return (
-    <section className="my-10 px-5 flex w-full justify-center items-center">
+    <section className="my-10 px-5 flex w-full h-full justify-center items-center">
       {showDetails && (
-        <div className="bg-[#fefefe] w-full mt-12 shadow-md border-2 py-8 px-4 rounded-md">
+        <div className="bg-[#fefefe] w-full mt-12 shadow-md border-2 py-8 px-4 rounded-md md:w-[500px] md:max-w-2xl">
           <div className="flex items-center gap-x-6 mb-12">
             <img
               className="w-20 h-20 rounded-full"

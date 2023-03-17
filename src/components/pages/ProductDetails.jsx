@@ -14,36 +14,31 @@ const ProductDetails = () => {
     (product) => product.id === parseInt(info)
   );
 
-  // Getting Number of Items in the Cart
-  let cartProductSize = uniqueItems.length;
-
   // Navigate to previous page
   const navigate = useNavigate();
   const handleBack = () => {
     navigate(-1);
   };
 
+  // loop through the rating and display the number of ratings as star icons
+  const starIcons = [];
+  for (let i = 0; i < Math.round(productInfo.rating); i++) {
+    starIcons.push(<img src={star} alt="star icon" key={i} className="w-3"/>);
+  }
 
   return (
-    <section className="px-[20px] pt-3 pb-64 relative h-screeen">
-      <div className="flex fixed justify-between items-center cursor-pointer shadow-sm top-0 p-4 left-0 w-full h-[30px] z-10">
-        <img
-          onClick={handleBack}
-          src={backArrow}
-          alt="back arrow icon"
-          className="w-[15px] h-[15px] hover:scale-110"
-        />
-        <Link to="/cart" className="relative">
-          <img src={cart} alt="" />
-          <p className="text-red-500 text-xs -top-2 -right-2 absolute font-bold">
-            {cartProductSize}
-          </p>
-        </Link>
+    <section className="px-[20px] bg-[#FDFBFB] mt-12  pt-3 pb-64 relative h-screeen">
+      <div className="flex items-center gap-x-4  mb-6">
+        <div className="min-w-[30px] min-h-[30px] flex justify-center items-center bg-[rgba(225,225,225,0.2)] rounded-[100%] cursor-pointer hover:scale-110">
+          <img
+            onClick={handleBack}
+            src={backArrow}
+            alt="back arrow icon"
+            className="w-[15px] h-[15px]"
+          />
+        </div>
+        <h1 className="font-bold text-[#303030]">{productInfo.title}</h1>
       </div>
-      <h1 className="font-bold text-[#303030] my-12">{productInfo.title}</h1>
-      {/* <p className="text-xs max-w-[250px] text-[rgba(48,_48,_48,_0.7)] mb-[10px]">
-        {productInfo.description}
-      </p> */}
       <div className="w-full h-[200px] flex items-center justify-center">
         <img
           src={productInfo.thumbnail}
@@ -51,24 +46,14 @@ const ProductDetails = () => {
           className="h-full object-contain rounded-sm"
         />
       </div>
-      {/* <div className="flex justify-center gap-x-[20px] mb-[20px] mt-[20px]">
-        <p className="size">38</p>
-        <p className="size">40</p>
-        <p className="size">42</p>
-        <p className="size">44</p>
-      </div> */}
       <footer className="bg-[#fefefe] flex flex-col rounded-t-3xl border px-[20px] py-6 w-full h-[40vh] fixed left-0 bottom-0 z-10">
         <div className="flex justify-between">
           <h1 className="text-[#303030] text-lg font-bold">
             {productInfo.title}
           </h1>
           <div className="flex gap-x-1 mb-[15px]">
-            <img src={star} alt="star icon" />
-            <img src={star} alt="star icon" />
-            <img src={star} alt="star icon" />
-            <img src={star} alt="star icon" />
-            <img src={star} alt="star icon" />
-            <p className="text-sm">{productInfo.rating.rate}</p>
+            {starIcons}
+            <p className="text-sm">{productInfo.rating}</p>
           </div>
         </div>
         <h2 className="mt-[18px] text-[#303030] mb-2 font-bold">Description</h2>

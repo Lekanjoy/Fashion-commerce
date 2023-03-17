@@ -6,8 +6,7 @@ import { ProductDataContext } from "../App";
 
 const ProductCard = ({ productData }) => {
   const { handleAddToCart } = useContext(ProductDataContext);
-
-  console.log(productData);
+  
   return (
     <>
       {productData.length < 1 ? (

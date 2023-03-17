@@ -11,7 +11,7 @@ const Header = ({ showNav, toggleSideBar, setSearchTerm }) => {
   let cartProductSize = uniqueItems.length;
 
   return (
-    <header className="flex fixed justify-between cursor-pointer items-center shadow-md top-0 p-4 left-0 w-full h-[50px] bg-[#fefefe] z-30">
+    <header className="flex fixed justify-between cursor-pointer items-center shadow-md top-0 p-4 left-0 w-full h-[50px] bg-[#fefefe] z-30 lg:px-10">
       <img
         className="w-5 h-5"
         onClick={toggleSideBar}
@@ -31,7 +31,7 @@ const Header = ({ showNav, toggleSideBar, setSearchTerm }) => {
         />
         <Link to="/cart">
           <img className="w-5 h-5" src={cart} alt="Cart details icon" />
-          <p className="text-white bg-red-500 w-4 h-4 text-center font-semibold border-2 border-[#28ADBF] rounded-full text-[10px] -top-2 -right-2 absolute">
+          <p className="text-white bg-red-500 w-4 h-4 text-center font-semibold border-2 border-[#28ADBF] rounded-full text-[9px] -top-1 -right-2 absolute">
             {cartProductSize}
           </p>
         </Link>

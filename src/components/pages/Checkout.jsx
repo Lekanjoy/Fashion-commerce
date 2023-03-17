@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { PaystackButton } from "react-paystack";
 import { useAuth } from "../../firebase";
 import { ProductDataContext } from "../../App";
+import backArrow from "../../assets/back-arrow.svg";
 
 
 const Checkout = () => {
@@ -37,8 +38,20 @@ const Checkout = () => {
     }
   }, []);
 
+   const handleBack = () => {
+     navigate(-1);
+   };
+
   return (
-    <div className="bg-gray-100 py-10 mt-12">
+    <div className="bg-gray-100 py-10 mt-6">
+      <div className="w-[30px] h-[30px] ml-4 flex justify-center items-center mb-6 bg-[rgba(225,225,225,0.2)] rounded-[100%] cursor-pointer hover:scale-110">
+        <img
+          onClick={handleBack}
+          src={backArrow}
+          alt="back arrow icon"
+          className="w-[15px] h-[15px]"
+        />
+      </div>
       <div className="max-w-6xl mx-auto px-4">
         <div className="bg-white shadow-lg rounded-lg p-6">
           <h2 className="text-xl font-semibold mb-4">Checkout</h2>
