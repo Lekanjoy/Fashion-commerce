@@ -72,6 +72,7 @@ function App() {
     const item = cartDetails.find((item) => item.title === name);
     return { ...item, quantity: itemCounts[name] };
   });
+  
   // Get Subtotal price of Items in Cart
   let subTotalArray = [];
 

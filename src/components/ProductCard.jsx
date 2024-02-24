@@ -1,8 +1,8 @@
-import React, { useState, useContext } from "react";
-import "react-toastify/dist/ReactToastify.css";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import star from "../assets/Star 4.svg";
+import "react-toastify/dist/ReactToastify.css";
 import { ProductDataContext } from "../App";
+import star from "../assets/Star 4.svg";
 
 const ProductCard = ({ productData }) => {
   const { handleAddToCart } = useContext(ProductDataContext);
@@ -19,7 +19,7 @@ const ProductCard = ({ productData }) => {
               className="bg-[#fefefe] w-full border shadow-md  p-2 rounded-md text-center"
             >
               <Link to={`/product/${product.id}`}>
-                {/* Navigates to unque product page details when clicked on image */}
+                {/* Navigates to unique product page details when clicked on image */}
                 <div className=" rounded  w-full h-[150px]  border ">
                   <img
                     src={product.images[0]}

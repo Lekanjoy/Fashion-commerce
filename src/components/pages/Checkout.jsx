@@ -5,7 +5,6 @@ import { useAuth } from "../../firebase";
 import { ProductDataContext } from "../../App";
 import backArrow from "../../assets/back-arrow.svg";
 
-
 const Checkout = () => {
   const { subTotalPrice } = useContext(ProductDataContext);
   const shippingPrice = subTotalPrice > 100 ? 3.25 : 0;
@@ -15,7 +14,9 @@ const Checkout = () => {
 
   // Credentials for Paystack
   const publicKey = import.meta.env.VITE_REACT_APP_PAYSTACK_PUBLIC_KEY;
-  const amount =Math.round(totalPrice * 460.5 * 100);
+
+  // Used Exchange rate of 460.5 naira to 1 dollar for example only, his does not represent the acccurate value
+  const amount = Math.round(totalPrice * 460.5 * 100);
   const email = user?.email;
 
   // Paystack Component Props
@@ -39,9 +40,9 @@ const Checkout = () => {
   }, []);
 
   // Handle Back Button
-   const handleBack = () => {
-     navigate(-1);
-   };
+  const handleBack = () => {
+    navigate(-1);
+  };
 
   //  Get date for delivery in Month, Day, Year format
   const deliveryDate = new Date();
@@ -51,9 +52,6 @@ const Checkout = () => {
     day: "numeric",
     year: "numeric",
   });
-
-
-
 
   return (
     <div className="py-10 mt-6 bg-[#FDFBFB] ">

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import { useContext } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import ProductCard from "./ProductCard";
 import SkeletonLoadingContainer from "./SkeletonLoadingContainer";
