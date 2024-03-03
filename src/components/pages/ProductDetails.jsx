@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, {useState, useContext, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ProductDataContext } from "../../App";
 import backArrow from "../../assets/back-arrow.svg";
@@ -6,8 +6,21 @@ import star from "../../assets/Star 4.svg";
 import { ToastContainer } from "react-toastify";
 
 const ProductDetails = () => {
-  const {productData, handleAddToCart } = useContext(ProductDataContext);
+  const [productData, setProductData] = useState([])
+  const { handleAddToCart } = useContext(ProductDataContext);
   const { info } = useParams();
+
+ // Getting Products Data from Backend
+ useEffect(() => {
+  fetch(
+    `https://dummyjson.com/products/search?q=&limit=100&skip=0`
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      setProductData(data.products);
+    })
+    .catch((error) => console.error(error));
+}, []);
 
   const productInfo = productData?.find(
     (product) => product.id === parseInt(info)
